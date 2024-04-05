@@ -39,7 +39,8 @@ OLS_model <- train(
                            verboseIter=T, 
                            indexOut = training_folds)
 )
-OLS_time <- toc() #end time and 7.209 seconds elapsed
+OLS_toc <- toc() #end time
+OLS_time <- OLS_toc$toc - OLS_toc$tic
 OLS_model
 cv_OLS <- OLS_model$results$Rsquared
 holdout_OLS <- cor(
@@ -59,7 +60,8 @@ EN_model <- train(
                            verboseIter=T, 
                            indexOut = training_folds)
 )
-EN_time <- toc() #end time and 9.087 seconds elapsed. 
+EN_toc <- toc() #end time 
+EN_time <- EN_toc$toc - EN_toc$tic
 EN_model
 cv_EN <- max(EN_model$results$Rsquared)
 holdout_EN <- cor(
@@ -79,7 +81,8 @@ RF_model <- train(
                            verboseIter=T, 
                            indexOut = training_folds)
 )
-RF_time <- toc() #end time() and 72.519 seconds
+RF_toc <- toc() #end time() 
+RF_time <- RF_toc$toc - RF_toc$tic
 RF_model
 cv_RF <- max(RF_model$results$Rsquared)
 holdout_RF <- cor(
@@ -100,7 +103,8 @@ XGB_model <- train(
                            verboseIter=T, 
                            indexOut = training_folds)
 )
-XGB_time <- toc() #end time and 9.757 seconds elapsed. 
+XGB_toc <- toc() #end time 
+XGB_time <- XGB_toc$toc - XGB_toc$tic
 XGB_model
 cv_XGB <- max(XGB_model$results$Rsquared)
 holdout_XGB <- cor(
@@ -199,7 +203,7 @@ XGB_p_model <- train(
                            indexOut = training_folds)
 )
 XGB_p_toc <- toc() #end time . 
-XGB_p_toc <- XGB_p_toc$toc - XGB_p_toc$tic #calculating time elapsed for table later.
+XGB_p_time <- XGB_p_toc$toc - XGB_p_toc$tic #calculating time elapsed for table later.
 XGB_p_model
 cv_p_XGB <- max(XGB_p_model$results$Rsquared)
 holdout_p_XGB <- cor(
@@ -237,11 +241,19 @@ table1_tbl <- tibble(
   )
 )
 
+table1_tbl
+
 table2_tbl <- tibble(
   algo= c("regression", "elastic net", "random forests", "xgboost"),
   original = c(OLS_time, EN_time, RF_time, XGB_time),
-  parallelized= c(OLS_p_time, EN_time, RF_time, XGB_time)
+  parallelized= c(OLS_p_time, EN_p_time, RF_p_time, XGB_p_time)
   )
 
 
 table2_tbl
+
+#1. Elastic Net and XGBoosts benefited the most from the parallelization as the time elapsed for both of them decreased from the original models time. 
+
+#2 63.3 was the difference between the Random Forest Parallel Model (68.7) and the xgboost parallel model (5.40). I think the amount of hyperparameters again slowed down the analysis even for the RF parallel model. 
+
+#3. I would do the elastic net model because it had the second highest R2 for the holdout model, while still having a decent high R2 for the 10-fold model. It was also the second fastest model for both the original and parallelized model. While the random forest model had high R2, it just takes the longest. 
