@@ -38,7 +38,7 @@ myControl <- trainControl(
   verboseIter = TRUE) 
 
 
-
+tic() #starts time
 OLS_Model <- train(`work hours` ~ .,
                    data = gss_train, 
                    method = "lm", 
@@ -46,6 +46,7 @@ OLS_Model <- train(`work hours` ~ .,
                    na.action = na.pass, 
                    trControl = myControl 
 )
+OLS_time <- toc() #ends time  & 5.5 seconds elapsed
 
 OLS_Model_test <- predict(Ols_Model, gss_test, na.action= na.pass) 
 
@@ -55,6 +56,7 @@ OLS_Model_test <- predict(Ols_Model, gss_test, na.action= na.pass)
 
 myGrid <- expand.grid(alpha =0:1, lambda =seq(0.0001, 0.1, length = 10)) 
 
+tic() #starts time
 EN_Model <- train(`work hours` ~ ., 
                   data = gss_train, 
                   tuneGrid = myGrid,
@@ -62,11 +64,12 @@ EN_Model <- train(`work hours` ~ .,
                   preProcess = "medianImpute", 
                   na.action = na.pass,
                   trControl = myControl) 
-
+EN_time <- toc() #ends time & 2.531 seconds elapsed 
 EN_Model_test <- predict(EN_Model, gss_test, na.action= na.pass) 
 
 
 RF_grid <- expand.grid(mtry= 510 , splitrule= 'variance' , min.node.size= 5 ) 
+tic() #starts time
 RF_Model <- train(`work hours` ~ ., 
                   data= gss_train, 
                   tuneGrid= RF_grid,
@@ -75,12 +78,13 @@ RF_Model <- train(`work hours` ~ .,
                   preProcess= "medianImpute",
                   na.action= na.pass,
                   trControl=myControl)
+RF_time <- toc() #ends time and 22.614 seconds elapsed 
 RF_Model_test <- predict(RF_Model, gss_test, na.action= na.pass) 
 
 
 
 XGB_grid <- expand.grid(nrounds= 50, alpha =1, lambda =.1, eta=.1)
-
+tic() #starts time
 XGB_Model <- train(`work hours` ~ .,
                    data= gss_train,
                    tuneGrid= XGB_grid,
@@ -89,6 +93,7 @@ XGB_Model <- train(`work hours` ~ .,
                    na.action= na.pass,
                    trControl= myControl
 )
+XGB_time <- toc() #ends time and 8.058 seconds elapsed 
 XGB_Model_test <- predict(XGB_Model, gss_test, na.action= na.pass)
 
 
