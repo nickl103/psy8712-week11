@@ -3,126 +3,124 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 library(tidyverse)
 library(haven)
 library(caret)
-library(stats)
 
-#Data Import and Cleaning
-gss_tbl <- read_sav("../data/GSS2016.sav") %>% 
-  mutate_all(~ifelse(.==0, NA, .)) %>%
-  filter(!is.na(MOSTHRS)) %>% 
-  rename(`work hours` = MOSTHRS) %>%
-  select(-HRS1, -HRS2) %>%
-  select(-where(~mean(is.na(.))>.75)) %>% 
-  mutate_all(as.numeric)
+# Data Import and Cleaning
+gss_import_tbl <- read_spss("../data/GSS2016.sav") %>%
+  filter(!is.na(MOSTHRS)) %>%
+  select(-HRS1, -HRS2)
 
+gss_tbl <- gss_import_tbl[, colSums(is.na(gss_import_tbl)) < .75 * nrow(gss_import_tbl)] %>%
+  mutate(across(everything(), as.numeric))
 
-#Visualization
-ggplot(gss_tbl, aes(x=`work hours`)) +
-  geom_histogram() +
-  labs(x= "Work Hours", y= "Frequency", title= "Frequency of Work Hours Histogram") 
+# Visualization
+ggplot(gss_tbl,
+       aes(x=MOSTHRS)) +
+  geom_histogram()
 
-#Analysis
-set.seed(1234)
-rows <- sample(nrow(gss_tbl)) 
-gss_shuffle <- gss_tbl[rows, ] 
-gss_split <- round(nrow(gss_shuffle) * 0.75) 
-gss_train <- gss_shuffle[1:gss_split, ] 
-gss_test <- gss_shuffle[(gss_split + 1):nrow(gss_shuffle), ] 
+# Analysis
+holdout_indices <- createDataPartition(gss_tbl$MOSTHRS,
+                                       p = .25,
+                                       list = T)$Resample1
+test_tbl <- gss_tbl[holdout_indices,]
+training_tbl <- gss_tbl[-holdout_indices,]
 
+training_folds <- createFolds(training_tbl$MOSTHRS)
 
-index_folds <- createFolds(gss_train$`work hours`, 10) 
-
-myControl <- trainControl(
-  method= "cv",
-  indexOut= index_folds,
-  number= 10, 
-  verboseIter = TRUE) 
-
-
-tic() #starts time
-OLS_Model <- train(`work hours` ~ .,
-                   data = gss_train, 
-                   method = "lm", 
-                   preProcess = "medianImpute",
-                   na.action = na.pass, 
-                   trControl = myControl 
+model1 <- train(
+  MOSTHRS ~ .,
+  training_tbl,
+  method="lm",
+  na.action = na.pass,
+  preProcess = c("center","scale","zv","nzv","medianImpute"),
+  trControl = trainControl(method="cv", 
+                           number=10, 
+                           verboseIter=T, 
+                           indexOut = training_folds)
 )
-OLS_time <- toc() #ends time  & 5.5 seconds elapsed
+model1
+cv_m1 <- model1$results$Rsquared
+holdout_m1 <- cor(
+  predict(model1, test_tbl, na.action = na.pass),
+  test_tbl$MOSTHRS
+)^2
 
-OLS_Model_test <- predict(Ols_Model, gss_test, na.action= na.pass) 
-
-
-
-
-
-myGrid <- expand.grid(alpha =0:1, lambda =seq(0.0001, 0.1, length = 10)) 
-
-tic() #starts time
-EN_Model <- train(`work hours` ~ ., 
-                  data = gss_train, 
-                  tuneGrid = myGrid,
-                  method = "glmnet",
-                  preProcess = "medianImpute", 
-                  na.action = na.pass,
-                  trControl = myControl) 
-EN_time <- toc() #ends time & 2.531 seconds elapsed 
-EN_Model_test <- predict(EN_Model, gss_test, na.action= na.pass) 
-
-
-RF_grid <- expand.grid(mtry= 510 , splitrule= 'variance' , min.node.size= 5 ) 
-tic() #starts time
-RF_Model <- train(`work hours` ~ ., 
-                  data= gss_train, 
-                  tuneGrid= RF_grid,
-                  metric= "RSquared",
-                  method= "ranger", 
-                  preProcess= "medianImpute",
-                  na.action= na.pass,
-                  trControl=myControl)
-RF_time <- toc() #ends time and 22.614 seconds elapsed 
-RF_Model_test <- predict(RF_Model, gss_test, na.action= na.pass) 
-
-
-
-XGB_grid <- expand.grid(nrounds= 50, alpha =1, lambda =.1, eta=.1)
-tic() #starts time
-XGB_Model <- train(`work hours` ~ .,
-                   data= gss_train,
-                   tuneGrid= XGB_grid,
-                   method= "xgbLinear", 
-                   preProcess="medianImpute",
-                   na.action= na.pass,
-                   trControl= myControl
+model2 <- train(
+  MOSTHRS ~ .,
+  training_tbl,
+  method="glmnet",
+  na.action = na.pass,
+  preProcess = c("center","scale","zv","nzv","medianImpute"),
+  trControl = trainControl(method="cv", 
+                           number=10, 
+                           verboseIter=T, 
+                           indexOut = training_folds)
 )
-XGB_time <- toc() #ends time and 8.058 seconds elapsed 
-XGB_Model_test <- predict(XGB_Model, gss_test, na.action= na.pass)
+model2
+cv_m2 <- max(model2$results$Rsquared)
+holdout_m2 <- cor(
+  predict(model2, test_tbl, na.action = na.pass),
+  test_tbl$MOSTHRS
+)^2
 
+model3 <- train(
+  MOSTHRS ~ .,
+  training_tbl,
+  method="ranger",
+  na.action = na.pass,
+  preProcess = c("center","scale","zv","nzv","medianImpute"),
+  trControl = trainControl(method="cv", 
+                           number=10, 
+                           verboseIter=T, 
+                           indexOut = training_folds)
+)
+model3
+cv_m3 <- max(model3$results$Rsquared)
+holdout_m3 <- cor(
+  predict(model3, test_tbl, na.action = na.pass),
+  test_tbl$MOSTHRS
+)^2
 
+model4 <- train(
+  MOSTHRS ~ .,
+  training_tbl,
+  method="xgbLinear",
+  na.action = na.pass,
+  tuneLength = 1,
+  preProcess = c("center","scale","zv","nzv","medianImpute"),
+  trControl = trainControl(method="cv", 
+                           number=10, 
+                           verboseIter=T, 
+                           indexOut = training_folds)
+)
+model4
+cv_m4 <- max(model4$results$Rsquared)
+holdout_m4 <- cor(
+  predict(model4, test_tbl, na.action = na.pass),
+  test_tbl$MOSTHRS
+)^2
 
+summary(resamples(list(model1, model2, model3, model4)), metric="Rsquared")
+dotplot(resamples(list(model1, model2, model3, model4)), metric="Rsquared")
 
-
-#Publication
-
-###moved formatting to publication section 
-OLS_cv_rsq <- sub("^0", "", formatC(OLS_Model$results$Rsquared[1], format='f', digits= 2))
-OLS_ho_rsq <- cor(OLS_Model_test, gss_test$`work hours`)^2 
-OLS_ho_rsq_f <- sub("^0", "", formatC(OLS_ho_rsq, format='f', digits= 2))
-
-EN_cv_rsq <- sub("^0", "", formatC(EN_Model$results$Rsquared[1], format='f', digits= 2))
-EN_ho_rsq <- cor(EN_Model_test, gss_test$`work hours`)^2 
-EN_ho_rsq_f <- sub("^0", "", formatC(EN_ho_rsq, format='f', digits= 2))
-
-RF_cv_rsq <- sub("^0", "", formatC(RF_Model$results$Rsquared[1], format='f', digits= 2))
-RF_ho_rsq <- cor(RF_Model_test, gss_test$`work hours`)^2 
-RF_ho_rsq_f <- sub("^0", "", formatC(RF_ho_rsq, format='f', digits= 2))
-
-XGB_cv_rsq <- sub("^0", "", formatC(XGB_Model$results$Rsquared[1], format='f', digits= 2))
-XGB_ho_rsq <- cor(XGB_Model_test, gss_test$`work hours`)^2 
-XGB_ho_rsq_f <- sub("^0", "", formatC(XGB_ho_rsq, format='f', digits= 2))
+# Publication
+make_it_pretty <- function (formatme) {
+  formatme <- formatC(formatme, format="f", digits=2)
+  formatme <- str_remove(formatme, "^0")
+  return(formatme)
+}
 
 table1_tbl <- tibble(
-  algo= c("OLS Regression", "Elastic Net", "Random Forest","eXtreme Gradient Boosting"),
-  cv_rsq = c(OLS_cv_rsq, EN_cv_rsq, RF_cv_rsq, XGB_cv_rsq),
-  ho_rsq = c(OLS_ho_rsq_f, EN_ho_rsq_f, RF_ho_rsq_f, XGB_ho_rsq_f))
-
-table1_tbl
- 
+  algo = c("regression","elastic net","random forests","xgboost"),
+  cv_rqs = c(
+    make_it_pretty(cv_m1),
+    make_it_pretty(cv_m2),
+    make_it_pretty(cv_m3),
+    make_it_pretty(cv_m4)
+  ),
+  ho_rqs = c(
+    make_it_pretty(holdout_m1),
+    make_it_pretty(holdout_m2),
+    make_it_pretty(holdout_m3),
+    make_it_pretty(holdout_m4)
+  )
+)
