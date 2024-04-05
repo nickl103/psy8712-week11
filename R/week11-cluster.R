@@ -120,4 +120,3 @@ table1_tbl <- tibble(
   ho_rsq = c(OLS_ho_rsq_f, EN_ho_rsq_f, RF_ho_rsq_f, XGB_ho_rsq_f))
 
 table1_tbl
- 
