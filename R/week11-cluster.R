@@ -23,7 +23,7 @@ ggplot(gss_tbl,
   geom_histogram()
 
 # Analysis
-
+setseed(1234)
 
 holdout_indices <- createDataPartition(gss_tbl$`work hours`,
                                        p = .25,
@@ -45,7 +45,7 @@ OLS_model <- train(
                            verboseIter=T, 
                            indexOut = training_folds)
 )
-OLS_toc <- toc() #end time and 7.209 seconds elapsed
+OLS_toc <- toc() #end time 
 OLS_time <- OLS_toc$toc - OLS_toc$tic
 OLS_model
 cv_OLS <- OLS_model$results$Rsquared
@@ -67,7 +67,7 @@ EN_model <- train(
                            verboseIter=T, 
                            indexOut = training_folds)
 )
-EN_toc <- toc() #end time and 9.087 seconds elapsed. 
+EN_toc <- toc() #end time 
 EN_time <- EN_toc$toc - EN_toc$tic
 EN_model
 cv_EN <- max(EN_model$results$Rsquared)
@@ -133,8 +133,7 @@ dotplot(resamples(list(OLS_model, EN_model, RF_model, XGB_model)), metric="Rsqua
 ###PARALLEL MODELS 
 #I just copied the code from the original models and added a p for parallel
 
-local_cluster <- makeCluster(detectCores()- 1) #making the local cluster based on demonstration and slides
-##used detectCores and my local computer has 8 so I did minus one following demonstration
+local_cluster <- makeCluster(40) #making the local cluster based on demonstration, chose random number because why not. 
 registerDoParallel(local_cluster) #telling R to parallelize it based on lecture
 
 #OLS parallel model, this doesn't parallelize according to lecture 
@@ -262,7 +261,7 @@ make_it_pretty <- function (formatme) {
 `Table 4` <- tibble(
   algo= c("regression", "elastic net", "random forests", "xgboost"),
   supercomputer = c(OLS_time, EN_time, RF_time, XGB_time),
-  supercomputer_n = c(OLS_p_time, EN_p_time, RF_p_time, XGB_p_time)
+  supercomputer_40 = c(OLS_p_time, EN_p_time, RF_p_time, XGB_p_time)
     
 )
 

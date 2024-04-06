@@ -19,6 +19,7 @@ ggplot(gss_tbl,
   geom_histogram()
 
 # Analysis
+set.seed(1234)
 holdout_indices <- createDataPartition(gss_tbl$`work hours`,
                                        p = .25,
                                        list = T)$Resample1
@@ -81,7 +82,7 @@ RF_model <- train(
                            verboseIter=T, 
                            indexOut = training_folds)
 )
-RF_toc <- toc() #end time() 
+RF_toc <- toc() #end time 
 RF_time <- RF_toc$toc - RF_toc$tic
 RF_model
 cv_RF <- max(RF_model$results$Rsquared)
