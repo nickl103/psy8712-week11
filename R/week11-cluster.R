@@ -23,7 +23,7 @@ ggplot(gss_tbl,
   geom_histogram()
 
 # Analysis
-setseed(1234)
+set.seed(1234)
 
 holdout_indices <- createDataPartition(gss_tbl$`work hours`,
                                        p = .25,
