@@ -1,0 +1,5 @@
+"","algo","cv_rqs","ho_rqs"
+"1","regression",".12",".00"
+"2","elastic net",".87",".37"
+"3","random forests",".94",".67"
+"4","xgboost",".93",".50"

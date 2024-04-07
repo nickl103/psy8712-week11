@@ -1,0 +1,494 @@
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.5.0     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+Loading required package: lattice
+
+Attaching package: ‘caret’
+
+The following object is masked from ‘package:purrr’:
+
+    lift
+
+Loading required package: foreach
+
+Attaching package: ‘foreach’
+
+The following objects are masked from ‘package:purrr’:
+
+    accumulate, when
+
+Loading required package: iterators
++ Fold01: intercept=TRUE 
+- Fold01: intercept=TRUE 
++ Fold02: intercept=TRUE 
+- Fold02: intercept=TRUE 
++ Fold03: intercept=TRUE 
+- Fold03: intercept=TRUE 
++ Fold04: intercept=TRUE 
+- Fold04: intercept=TRUE 
++ Fold05: intercept=TRUE 
+- Fold05: intercept=TRUE 
++ Fold06: intercept=TRUE 
+- Fold06: intercept=TRUE 
++ Fold07: intercept=TRUE 
+- Fold07: intercept=TRUE 
++ Fold08: intercept=TRUE 
+- Fold08: intercept=TRUE 
++ Fold09: intercept=TRUE 
+- Fold09: intercept=TRUE 
++ Fold10: intercept=TRUE 
+- Fold10: intercept=TRUE 
+Aggregating results
+Fitting final model on full training set
+Warning messages:
+1: In predict.lm(modelFit, newdata) :
+  prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
+2: In predict.lm(modelFit, newdata) :
+  prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
+3: In predict.lm(modelFit, newdata) :
+  prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
+4: In predict.lm(modelFit, newdata) :
+  prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
+5: In predict.lm(modelFit, newdata) :
+  prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
+6: In predict.lm(modelFit, newdata) :
+  prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
+7: In predict.lm(modelFit, newdata) :
+  prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
+8: In predict.lm(modelFit, newdata) :
+  prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
+9: In predict.lm(modelFit, newdata) :
+  prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
+10: In predict.lm(modelFit, newdata) :
+  prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
+7.225 sec elapsed
+Linear Regression 
+
+426 samples
+536 predictors
+
+Pre-processing: centered (503), scaled (503), median imputation (503),
+ remove (33) 
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 383, 383, 384, 385, 383, 383, ... 
+Resampling results:
+
+  RMSE      Rsquared   MAE     
+  116.1823  0.1154293  30.89772
+
+Tuning parameter 'intercept' was held constant at a value of TRUE
+Warning message:
+In predict.lm(modelFit, newdata) :
+  prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
++ Fold01: alpha=0.10, lambda=8.111 
+- Fold01: alpha=0.10, lambda=8.111 
++ Fold01: alpha=0.55, lambda=8.111 
+- Fold01: alpha=0.55, lambda=8.111 
++ Fold01: alpha=1.00, lambda=8.111 
+- Fold01: alpha=1.00, lambda=8.111 
++ Fold02: alpha=0.10, lambda=8.111 
+- Fold02: alpha=0.10, lambda=8.111 
++ Fold02: alpha=0.55, lambda=8.111 
+- Fold02: alpha=0.55, lambda=8.111 
++ Fold02: alpha=1.00, lambda=8.111 
+- Fold02: alpha=1.00, lambda=8.111 
++ Fold03: alpha=0.10, lambda=8.111 
+- Fold03: alpha=0.10, lambda=8.111 
++ Fold03: alpha=0.55, lambda=8.111 
+- Fold03: alpha=0.55, lambda=8.111 
++ Fold03: alpha=1.00, lambda=8.111 
+- Fold03: alpha=1.00, lambda=8.111 
++ Fold04: alpha=0.10, lambda=8.111 
+- Fold04: alpha=0.10, lambda=8.111 
++ Fold04: alpha=0.55, lambda=8.111 
+- Fold04: alpha=0.55, lambda=8.111 
++ Fold04: alpha=1.00, lambda=8.111 
+- Fold04: alpha=1.00, lambda=8.111 
++ Fold05: alpha=0.10, lambda=8.111 
+- Fold05: alpha=0.10, lambda=8.111 
++ Fold05: alpha=0.55, lambda=8.111 
+- Fold05: alpha=0.55, lambda=8.111 
++ Fold05: alpha=1.00, lambda=8.111 
+- Fold05: alpha=1.00, lambda=8.111 
++ Fold06: alpha=0.10, lambda=8.111 
+- Fold06: alpha=0.10, lambda=8.111 
++ Fold06: alpha=0.55, lambda=8.111 
+- Fold06: alpha=0.55, lambda=8.111 
++ Fold06: alpha=1.00, lambda=8.111 
+- Fold06: alpha=1.00, lambda=8.111 
++ Fold07: alpha=0.10, lambda=8.111 
+- Fold07: alpha=0.10, lambda=8.111 
++ Fold07: alpha=0.55, lambda=8.111 
+- Fold07: alpha=0.55, lambda=8.111 
++ Fold07: alpha=1.00, lambda=8.111 
+- Fold07: alpha=1.00, lambda=8.111 
++ Fold08: alpha=0.10, lambda=8.111 
+- Fold08: alpha=0.10, lambda=8.111 
++ Fold08: alpha=0.55, lambda=8.111 
+- Fold08: alpha=0.55, lambda=8.111 
++ Fold08: alpha=1.00, lambda=8.111 
+- Fold08: alpha=1.00, lambda=8.111 
++ Fold09: alpha=0.10, lambda=8.111 
+- Fold09: alpha=0.10, lambda=8.111 
++ Fold09: alpha=0.55, lambda=8.111 
+- Fold09: alpha=0.55, lambda=8.111 
++ Fold09: alpha=1.00, lambda=8.111 
+- Fold09: alpha=1.00, lambda=8.111 
++ Fold10: alpha=0.10, lambda=8.111 
+- Fold10: alpha=0.10, lambda=8.111 
++ Fold10: alpha=0.55, lambda=8.111 
+- Fold10: alpha=0.55, lambda=8.111 
++ Fold10: alpha=1.00, lambda=8.111 
+- Fold10: alpha=1.00, lambda=8.111 
+Aggregating results
+Selecting tuning parameters
+Fitting alpha = 0.1, lambda = 0.811 on full training set
+12.934 sec elapsed
+glmnet 
+
+426 samples
+536 predictors
+
+Pre-processing: centered (503), scaled (503), median imputation (503),
+ remove (33) 
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 382, 384, 383, 383, 384, 385, ... 
+Resampling results across tuning parameters:
+
+  alpha  lambda     RMSE       Rsquared   MAE      
+  0.10   0.8110816   6.458250  0.8749061   4.485192
+  0.10   2.5648652   7.717581  0.8312548   5.416878
+  0.10   8.1108160  10.318420  0.7219814   7.170820
+  0.55   0.8110816   8.485364  0.7920232   5.920613
+  0.55   2.5648652  10.974906  0.6606635   7.563799
+  0.55   8.1108160  13.344705  0.5757299   9.614326
+  1.00   0.8110816   9.791822  0.7238607   6.728200
+  1.00   2.5648652  12.073042  0.5908459   8.422190
+  1.00   8.1108160  14.801195  0.5440762  10.679220
+
+RMSE was used to select the optimal model using the smallest value.
+The final values used for the model were alpha = 0.1 and lambda = 0.8110816.
++ Fold01: mtry=  2, min.node.size=5, splitrule=variance 
+- Fold01: mtry=  2, min.node.size=5, splitrule=variance 
++ Fold01: mtry= 31, min.node.size=5, splitrule=variance 
+- Fold01: mtry= 31, min.node.size=5, splitrule=variance 
++ Fold01: mtry=502, min.node.size=5, splitrule=variance 
+- Fold01: mtry=502, min.node.size=5, splitrule=variance 
++ Fold01: mtry=  2, min.node.size=5, splitrule=extratrees 
+- Fold01: mtry=  2, min.node.size=5, splitrule=extratrees 
++ Fold01: mtry= 31, min.node.size=5, splitrule=extratrees 
+- Fold01: mtry= 31, min.node.size=5, splitrule=extratrees 
++ Fold01: mtry=502, min.node.size=5, splitrule=extratrees 
+- Fold01: mtry=502, min.node.size=5, splitrule=extratrees 
++ Fold02: mtry=  2, min.node.size=5, splitrule=variance 
+- Fold02: mtry=  2, min.node.size=5, splitrule=variance 
++ Fold02: mtry= 31, min.node.size=5, splitrule=variance 
+- Fold02: mtry= 31, min.node.size=5, splitrule=variance 
++ Fold02: mtry=502, min.node.size=5, splitrule=variance 
+- Fold02: mtry=502, min.node.size=5, splitrule=variance 
++ Fold02: mtry=  2, min.node.size=5, splitrule=extratrees 
+- Fold02: mtry=  2, min.node.size=5, splitrule=extratrees 
++ Fold02: mtry= 31, min.node.size=5, splitrule=extratrees 
+- Fold02: mtry= 31, min.node.size=5, splitrule=extratrees 
++ Fold02: mtry=502, min.node.size=5, splitrule=extratrees 
+- Fold02: mtry=502, min.node.size=5, splitrule=extratrees 
++ Fold03: mtry=  2, min.node.size=5, splitrule=variance 
+- Fold03: mtry=  2, min.node.size=5, splitrule=variance 
++ Fold03: mtry= 31, min.node.size=5, splitrule=variance 
+- Fold03: mtry= 31, min.node.size=5, splitrule=variance 
++ Fold03: mtry=502, min.node.size=5, splitrule=variance 
+- Fold03: mtry=502, min.node.size=5, splitrule=variance 
++ Fold03: mtry=  2, min.node.size=5, splitrule=extratrees 
+- Fold03: mtry=  2, min.node.size=5, splitrule=extratrees 
++ Fold03: mtry= 31, min.node.size=5, splitrule=extratrees 
+- Fold03: mtry= 31, min.node.size=5, splitrule=extratrees 
++ Fold03: mtry=502, min.node.size=5, splitrule=extratrees 
+- Fold03: mtry=502, min.node.size=5, splitrule=extratrees 
++ Fold04: mtry=  2, min.node.size=5, splitrule=variance 
+- Fold04: mtry=  2, min.node.size=5, splitrule=variance 
++ Fold04: mtry= 31, min.node.size=5, splitrule=variance 
+- Fold04: mtry= 31, min.node.size=5, splitrule=variance 
++ Fold04: mtry=502, min.node.size=5, splitrule=variance 
+- Fold04: mtry=502, min.node.size=5, splitrule=variance 
++ Fold04: mtry=  2, min.node.size=5, splitrule=extratrees 
+- Fold04: mtry=  2, min.node.size=5, splitrule=extratrees 
++ Fold04: mtry= 31, min.node.size=5, splitrule=extratrees 
+- Fold04: mtry= 31, min.node.size=5, splitrule=extratrees 
++ Fold04: mtry=502, min.node.size=5, splitrule=extratrees 
+- Fold04: mtry=502, min.node.size=5, splitrule=extratrees 
++ Fold05: mtry=  2, min.node.size=5, splitrule=variance 
+- Fold05: mtry=  2, min.node.size=5, splitrule=variance 
++ Fold05: mtry= 31, min.node.size=5, splitrule=variance 
+- Fold05: mtry= 31, min.node.size=5, splitrule=variance 
++ Fold05: mtry=502, min.node.size=5, splitrule=variance 
+- Fold05: mtry=502, min.node.size=5, splitrule=variance 
++ Fold05: mtry=  2, min.node.size=5, splitrule=extratrees 
+- Fold05: mtry=  2, min.node.size=5, splitrule=extratrees 
++ Fold05: mtry= 31, min.node.size=5, splitrule=extratrees 
+- Fold05: mtry= 31, min.node.size=5, splitrule=extratrees 
++ Fold05: mtry=502, min.node.size=5, splitrule=extratrees 
+- Fold05: mtry=502, min.node.size=5, splitrule=extratrees 
++ Fold06: mtry=  2, min.node.size=5, splitrule=variance 
+- Fold06: mtry=  2, min.node.size=5, splitrule=variance 
++ Fold06: mtry= 31, min.node.size=5, splitrule=variance 
+- Fold06: mtry= 31, min.node.size=5, splitrule=variance 
++ Fold06: mtry=502, min.node.size=5, splitrule=variance 
+- Fold06: mtry=502, min.node.size=5, splitrule=variance 
++ Fold06: mtry=  2, min.node.size=5, splitrule=extratrees 
+- Fold06: mtry=  2, min.node.size=5, splitrule=extratrees 
++ Fold06: mtry= 31, min.node.size=5, splitrule=extratrees 
+- Fold06: mtry= 31, min.node.size=5, splitrule=extratrees 
++ Fold06: mtry=502, min.node.size=5, splitrule=extratrees 
+- Fold06: mtry=502, min.node.size=5, splitrule=extratrees 
++ Fold07: mtry=  2, min.node.size=5, splitrule=variance 
+- Fold07: mtry=  2, min.node.size=5, splitrule=variance 
++ Fold07: mtry= 31, min.node.size=5, splitrule=variance 
+- Fold07: mtry= 31, min.node.size=5, splitrule=variance 
++ Fold07: mtry=502, min.node.size=5, splitrule=variance 
+- Fold07: mtry=502, min.node.size=5, splitrule=variance 
++ Fold07: mtry=  2, min.node.size=5, splitrule=extratrees 
+- Fold07: mtry=  2, min.node.size=5, splitrule=extratrees 
++ Fold07: mtry= 31, min.node.size=5, splitrule=extratrees 
+- Fold07: mtry= 31, min.node.size=5, splitrule=extratrees 
++ Fold07: mtry=502, min.node.size=5, splitrule=extratrees 
+- Fold07: mtry=502, min.node.size=5, splitrule=extratrees 
++ Fold08: mtry=  2, min.node.size=5, splitrule=variance 
+- Fold08: mtry=  2, min.node.size=5, splitrule=variance 
++ Fold08: mtry= 31, min.node.size=5, splitrule=variance 
+- Fold08: mtry= 31, min.node.size=5, splitrule=variance 
++ Fold08: mtry=502, min.node.size=5, splitrule=variance 
+- Fold08: mtry=502, min.node.size=5, splitrule=variance 
++ Fold08: mtry=  2, min.node.size=5, splitrule=extratrees 
+- Fold08: mtry=  2, min.node.size=5, splitrule=extratrees 
++ Fold08: mtry= 31, min.node.size=5, splitrule=extratrees 
+- Fold08: mtry= 31, min.node.size=5, splitrule=extratrees 
++ Fold08: mtry=502, min.node.size=5, splitrule=extratrees 
+- Fold08: mtry=502, min.node.size=5, splitrule=extratrees 
++ Fold09: mtry=  2, min.node.size=5, splitrule=variance 
+- Fold09: mtry=  2, min.node.size=5, splitrule=variance 
++ Fold09: mtry= 31, min.node.size=5, splitrule=variance 
+- Fold09: mtry= 31, min.node.size=5, splitrule=variance 
++ Fold09: mtry=502, min.node.size=5, splitrule=variance 
+- Fold09: mtry=502, min.node.size=5, splitrule=variance 
++ Fold09: mtry=  2, min.node.size=5, splitrule=extratrees 
+- Fold09: mtry=  2, min.node.size=5, splitrule=extratrees 
++ Fold09: mtry= 31, min.node.size=5, splitrule=extratrees 
+- Fold09: mtry= 31, min.node.size=5, splitrule=extratrees 
++ Fold09: mtry=502, min.node.size=5, splitrule=extratrees 
+- Fold09: mtry=502, min.node.size=5, splitrule=extratrees 
++ Fold10: mtry=  2, min.node.size=5, splitrule=variance 
+- Fold10: mtry=  2, min.node.size=5, splitrule=variance 
++ Fold10: mtry= 31, min.node.size=5, splitrule=variance 
+- Fold10: mtry= 31, min.node.size=5, splitrule=variance 
++ Fold10: mtry=502, min.node.size=5, splitrule=variance 
+- Fold10: mtry=502, min.node.size=5, splitrule=variance 
++ Fold10: mtry=  2, min.node.size=5, splitrule=extratrees 
+- Fold10: mtry=  2, min.node.size=5, splitrule=extratrees 
++ Fold10: mtry= 31, min.node.size=5, splitrule=extratrees 
+- Fold10: mtry= 31, min.node.size=5, splitrule=extratrees 
++ Fold10: mtry=502, min.node.size=5, splitrule=extratrees 
+- Fold10: mtry=502, min.node.size=5, splitrule=extratrees 
+Aggregating results
+Selecting tuning parameters
+Fitting mtry = 502, splitrule = extratrees, min.node.size = 5 on full training set
+52.389 sec elapsed
+Random Forest 
+
+426 samples
+536 predictors
+
+Pre-processing: centered (503), scaled (503), median imputation (503),
+ remove (33) 
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 382, 383, 385, 383, 384, 384, ... 
+Resampling results across tuning parameters:
+
+  mtry  splitrule   RMSE       Rsquared   MAE     
+    2   variance     9.851043  0.9040457  6.908676
+    2   extratrees  11.072931  0.8993889  7.941527
+   31   variance     6.543496  0.9359862  4.405576
+   31   extratrees   7.426786  0.9201284  5.052576
+  502   variance     5.453626  0.9246754  3.591437
+  502   extratrees   5.384978  0.9354217  3.645847
+
+Tuning parameter 'min.node.size' was held constant at a value of 5
+RMSE was used to select the optimal model using the smallest value.
+The final values used for the model were mtry = 502, splitrule = extratrees
+ and min.node.size = 5.
++ Fold01: lambda=0, alpha=0, nrounds=50, eta=0.3 
+- Fold01: lambda=0, alpha=0, nrounds=50, eta=0.3 
++ Fold02: lambda=0, alpha=0, nrounds=50, eta=0.3 
+- Fold02: lambda=0, alpha=0, nrounds=50, eta=0.3 
++ Fold03: lambda=0, alpha=0, nrounds=50, eta=0.3 
+- Fold03: lambda=0, alpha=0, nrounds=50, eta=0.3 
++ Fold04: lambda=0, alpha=0, nrounds=50, eta=0.3 
+- Fold04: lambda=0, alpha=0, nrounds=50, eta=0.3 
++ Fold05: lambda=0, alpha=0, nrounds=50, eta=0.3 
+- Fold05: lambda=0, alpha=0, nrounds=50, eta=0.3 
++ Fold06: lambda=0, alpha=0, nrounds=50, eta=0.3 
+- Fold06: lambda=0, alpha=0, nrounds=50, eta=0.3 
++ Fold07: lambda=0, alpha=0, nrounds=50, eta=0.3 
+- Fold07: lambda=0, alpha=0, nrounds=50, eta=0.3 
++ Fold08: lambda=0, alpha=0, nrounds=50, eta=0.3 
+- Fold08: lambda=0, alpha=0, nrounds=50, eta=0.3 
++ Fold09: lambda=0, alpha=0, nrounds=50, eta=0.3 
+- Fold09: lambda=0, alpha=0, nrounds=50, eta=0.3 
++ Fold10: lambda=0, alpha=0, nrounds=50, eta=0.3 
+- Fold10: lambda=0, alpha=0, nrounds=50, eta=0.3 
+Aggregating results
+Fitting final model on full training set
+9.462 sec elapsed
+eXtreme Gradient Boosting 
+
+426 samples
+536 predictors
+
+Pre-processing: centered (503), scaled (503), median imputation (503),
+ remove (33) 
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 382, 384, 383, 383, 384, 382, ... 
+Resampling results:
+
+  RMSE      Rsquared   MAE     
+  4.113662  0.9348943  1.112441
+
+Tuning parameter 'nrounds' was held constant at a value of 50
+Tuning
+ 'alpha' was held constant at a value of 0
+Tuning parameter 'eta' was
+ held constant at a value of 0.3
+
+Call:
+summary.resamples(object = resamples(list(OLS_model, EN_model,
+ RF_model, XGB_model)), metric = "Rsquared")
+
+Models: Model1, Model2, Model3, Model4 
+Number of resamples: 10 
+
+Rsquared 
+               Min.     1st Qu.     Median      Mean   3rd Qu.      Max. NA's
+Model1 1.087315e-05 0.007475237 0.06771924 0.1154293 0.1706154 0.4188188    0
+Model2 7.316044e-01 0.861160891 0.88578880 0.8749061 0.9029598 0.9584461    0
+Model3 8.957600e-01 0.922703502 0.93881703 0.9354217 0.9461176 0.9639039    0
+Model4 7.408218e-01 0.933333690 0.96026571 0.9348943 0.9680245 0.9950077    0
+
+Aggregating results
+Fitting final model on full training set
+8.646 sec elapsed
+Linear Regression 
+
+426 samples
+536 predictors
+
+Pre-processing: centered (503), scaled (503), median imputation (503),
+ remove (33) 
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 384, 383, 383, 384, 383, 385, ... 
+Resampling results:
+
+  RMSE     Rsquared   MAE    
+  127.445  0.2269916  31.3536
+
+Tuning parameter 'intercept' was held constant at a value of TRUE
+Warning message:
+In predict.lm(modelFit, newdata) :
+  prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
+Aggregating results
+Selecting tuning parameters
+Fitting alpha = 0.1, lambda = 0.811 on full training set
+3.841 sec elapsed
+glmnet 
+
+426 samples
+536 predictors
+
+Pre-processing: centered (503), scaled (503), median imputation (503),
+ remove (33) 
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 383, 382, 385, 383, 385, 383, ... 
+Resampling results across tuning parameters:
+
+  alpha  lambda     RMSE       Rsquared   MAE      
+  0.10   0.8110816   6.119423  0.8896718   4.416568
+  0.10   2.5648652   7.339842  0.8480905   5.241853
+  0.10   8.1108160  10.225185  0.7250860   7.027021
+  0.55   0.8110816   8.202775  0.8049489   5.758224
+  0.55   2.5648652  11.031974  0.6570253   7.604129
+  0.55   8.1108160  13.341867  0.5753957   9.593249
+  1.00   0.8110816   9.714124  0.7275864   6.608380
+  1.00   2.5648652  12.077767  0.5904091   8.454273
+  1.00   8.1108160  14.782321  0.5440762  10.676867
+
+RMSE was used to select the optimal model using the smallest value.
+The final values used for the model were alpha = 0.1 and lambda = 0.8110816.
+Aggregating results
+Selecting tuning parameters
+Fitting mtry = 502, splitrule = variance, min.node.size = 5 on full training set
+11.643 sec elapsed
+Random Forest 
+
+426 samples
+536 predictors
+
+Pre-processing: centered (503), scaled (503), median imputation (503),
+ remove (33) 
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 383, 384, 384, 383, 384, 383, ... 
+Resampling results across tuning parameters:
+
+  mtry  splitrule   RMSE       Rsquared   MAE     
+    2   variance    10.239498  0.8714297  7.092011
+    2   extratrees  11.357475  0.8652098  8.090864
+   31   variance     7.310910  0.8910834  4.656726
+   31   extratrees   7.940963  0.8871032  5.183999
+  502   variance     6.321222  0.8832224  3.913087
+  502   extratrees   6.421387  0.8864340  4.006965
+
+Tuning parameter 'min.node.size' was held constant at a value of 5
+RMSE was used to select the optimal model using the smallest value.
+The final values used for the model were mtry = 502, splitrule = variance
+ and min.node.size = 5.
+Aggregating results
+Fitting final model on full training set
+3.982 sec elapsed
+eXtreme Gradient Boosting 
+
+426 samples
+536 predictors
+
+Pre-processing: centered (503), scaled (503), median imputation (503),
+ remove (33) 
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 384, 384, 383, 384, 384, 384, ... 
+Resampling results:
+
+  RMSE      Rsquared   MAE      
+  2.919977  0.9668044  0.8608228
+
+Tuning parameter 'nrounds' was held constant at a value of 50
+Tuning
+ 'alpha' was held constant at a value of 0
+Tuning parameter 'eta' was
+ held constant at a value of 0.3
+
+Call:
+summary.resamples(object = resamples(list(OLS_p_model, EN_p_model,
+ RF_p_model, XGB_p_model)), metric = "Rsquared")
+
+Models: Model1, Model2, Model3, Model4 
+Number of resamples: 10 
+
+Rsquared 
+               Min.    1st Qu.    Median      Mean   3rd Qu.      Max. NA's
+Model1 1.904826e-05 0.02089262 0.1812381 0.2269916 0.2852924 0.9120996    0
+Model2 8.354401e-01 0.86117684 0.8921484 0.8896718 0.9183823 0.9429739    0
+Model3 6.362343e-01 0.89741243 0.9100942 0.8832224 0.9377302 0.9502762    0
+Model4 9.050064e-01 0.94108781 0.9822152 0.9668044 0.9944638 0.9977624    0
+
