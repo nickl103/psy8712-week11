@@ -248,13 +248,12 @@ table2_tbl <- tibble(
   algo= c("regression", "elastic net", "random forests", "xgboost"),
   original = c(OLS_time, EN_time, RF_time, XGB_time),
   parallelized= c(OLS_p_time, EN_p_time, RF_p_time, XGB_p_time)
-  )
+  ) #made table with times from original and parallized models following assignment guidelines
 
 
 table2_tbl
-
 #1. Elastic Net and XGBoosts benefited the most from the parallelization as the time elapsed for both of them decreased from the original models time. 
 
 #2 63.3 was the difference between the Random Forest Parallel Model (68.7) and the xgboost parallel model (5.40). I think the amount of hyperparameters again slowed down the analysis even for the RF parallel model. 
 
-#3. I would do the elastic net model because it had the second highest R2 for the holdout model, while still having a decent high R2 for the 10-fold model. It was also the second fastest model for both the original and parallelized model. While the random forest model had high R2, it just takes the longest. 
+#3. I would do the elastic net model because it had the second highest R2 for the holdout model, while still having a decent high R2 for the 10-fold model. It was also the second fastest model for both the original and parallelized model. While the random forest model had high R2, it just takes the longest.

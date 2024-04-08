@@ -8,7 +8,7 @@ library(doParallel)
 library(tictoc)
 
 # Data Import and Cleaning
-gss_import_tbl <- read_spss("/home/lande065/nickl103/psy8712-week11/data/GSS2016.sav") %>%
+gss_import_tbl <- read_spss("/home/lande065/nickl103/psy8712-week11/data/GSS2016.sav") %>% #I know this isn't reproducible but I couldn't get it to work any other way. 
   filter(!is.na(MOSTHRS)) %>%
   rename(`work hours`= MOSTHRS) %>%
   select(-HRS1, -HRS2)
@@ -261,5 +261,9 @@ make_it_pretty <- function (formatme) {
 )
 
 
-write.csv(`Table 3`, "table3.csv")
+write.csv(`Table 3`, "table3.csv") 
 write.csv(`Table 4`, "table4.csv")
+
+#1.Elastic Net, Random Forest, and eXtreme Gradiant Boosting all benefited from the supercomputer, but Random Forest benefited the most going from 52.389 to 11.643. The supercomputer was able to run through the more hyperparameters a lot quicker than my local computer. 
+#2.The number of cores used lessens the amount of time needed to run the models. 
+#3.For the models we used for this assignment, I probably would not recommend using the supercomputer because even the longest model only took slightly over a minute at the longest for only a .67 Rsquared at the highest (random forest model), while the work it took to get the files in order to use the supercomputer took hours to do. The benefit of using the supercomputer (less time to run each model) was outweighed by the cons in my opinion. Since I'm recommending agaisnt using the supercomputer, like with the local file, I would choose the XGB model since it had the best R squared compared to the time it took for the model to work. 
